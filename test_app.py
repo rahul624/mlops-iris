@@ -7,7 +7,7 @@ def test_ping():
         response = client.get("/ping")
         # asserting the correct response is received
         assert response.status_code == 200
-        assert response.json() == {"ping": "pong"}
+        assert response.json()["ping"] == "pong"
 
 
 # test to check if Iris Virginica is classified correctly
