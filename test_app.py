@@ -5,8 +5,7 @@ from main import app
 def test_ping():
     with TestClient(app) as client:
         response = client.get("/ping")
-        # asserting the correct response is received
-        assert response.status_code == 200
+        # asserting the correct response is re
         assert response.json() == {"ping": "pong"}
 
 
@@ -54,4 +53,4 @@ def test_pred_versicolor():
         response = client.post("/predict_flower", json=payload)
         # asserting the correct response is received
         assert response.status_code == 200
-        assert response.json() == {"flower_class": "Versicolor"}
+        assert response.json() == {"flower_class": "Iris Versicolour"}
