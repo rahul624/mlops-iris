@@ -48,7 +48,6 @@ def ping():
 # Response: QueryOut containing the flower_class predicted (200)
 def predict_flower(query_data: QueryIn):
     output = {"flower_class": predict(query_data)}
-    print (output)
     return output
 
 @app.post("/feedback_loop", status_code=200)
@@ -57,7 +56,9 @@ def predict_flower(query_data: QueryIn):
 # Response: Dict with detail confirming success (200)
 def feedback_loop(data: List[FeedbackIn]):
     retrain(data)
-    return {"detail": "Feedback loop successful"}
+    return {"detail": "Feedback loop successful",
+    "timestamp": datetime.timestamp(datetime.now())
+    }
 
 
 # Main function to start the app when main.py is called
