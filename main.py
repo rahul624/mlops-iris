@@ -49,6 +49,7 @@ def ping():
 def predict_flower(query_data: QueryIn):
     output = {"flower_class": predict(query_data)}
     return output
+    return {"timestamp": datetime.timestamp(datetime.now())}
 
 @app.post("/feedback_loop", status_code=200)
 # Route to further train the model based on user input in form of feedback loop
