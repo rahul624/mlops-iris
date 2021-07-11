@@ -9,15 +9,6 @@ def test_ping():
         assert response.status_code == 200
         assert response.json() == {"ping": "pong"}
 
-# test to check the correct functioning of the /feedback loop route
-def test_ping():
-    with TestClient(app) as client:
-        response = client.post("/feedback_loop")
-        # asserting the correct response is received
-        print (response)
-    #  assert response.status_code == 200
-        assert response.json() == {"detail": "Feedback loop successful"}
-
 
 # test to check if Iris Virginica is classified correctly
 def test_pred_virginica():
@@ -38,13 +29,29 @@ def test_pred_virginica():
 def test_pred_setosa():
     # defining a sample payload for the testcase
     payload = {
-        "sepal_length": 4,
-        "sepal_width": 3,
-        "petal_length": 5.2,
-        "petal_width": 4.4,
+        "sepal_length":5,
+        "sepal_width":3.2,
+        "petal_length":1.2,
+        "petal_width":0.2,
     }
     with TestClient(app) as client:
         response = client.post("/predict_flower", json=payload)
         # asserting the correct response is received
         assert response.status_code == 200
         assert response.json() == {"flower_class": "Iris Setosa"}
+
+
+# test to check if Iris versicolor is classified correctly
+def test_pred_versicolor():
+    # defining a sample payload for the testcase
+    payload = {
+        "sepal_length":5.7,
+        "sepal_width":2.8,
+        "petal_length":4.1,
+        "petal_width":1.3,
+    }
+    with TestClient(app) as client:
+        response = client.post("/predict_flower", json=payload)
+        # asserting the correct response is received
+        assert response.status_code == 200
+        assert response.json() == {"flower_class": "Versicolor"}
